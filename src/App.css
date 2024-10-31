@@ -39,64 +39,14 @@
 }
 
 .expense-form-container {
-  display: grid;
+  display: flex;
   padding-top: 20%;
   padding-bottom: 10%;
   gap: 20px;
-  grid-template-columns: auto auto auto 35% auto auto;
-  grid-template-rows: 5% auto;
   justify-content: center;
   align-content: center;
 }
 
-#costLabel {
-  grid-column: 1;
-  grid-row: 1;
-  margin: auto;
-}
-
-#categoryLabel {
-  grid-column: 2;
-  grid-row: 1;
-  margin: auto;
-}
-
-#noteLabel {
-  grid-column: 4;
-  grid-row: 1;
-  margin: auto;
-}
-
-#dateLabel {
-  grid-column: 3;
-  grid-row: 1;
-  margin: auto;
-}
-
-#costInput {
-  grid-column: 1;
-  grid-row: 2;
-}
-
-#categoryInput {
-  grid-column: 2;
-  grid-row: 2;
-}
-
-#noteInput {
-  grid-column: 4;
-  grid-row: 2;
-}
-
-#dateInput {
-  grid-column: 3;
-  grid-row: 2;
-}
-
-#submitButton {
-  grid-column: 6;
-  grid-row: 1 / span 2;
-}
 
 
 .expense-result-container {

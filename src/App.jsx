@@ -6,11 +6,14 @@ import { Chart, ArcElement } from "chart.js/auto";
 import { Doughnut } from "react-chartjs-2";
 Chart.register(ArcElement);
 
+import { DataGrid } from "@mui/x-data-grid";
+import Paper from "@mui/material/Paper";
 
-import { DataGrid } from '@mui/x-data-grid';
-import Paper from '@mui/material/Paper';
+import TextField from "@mui/material/TextField";
+import Box from "@mui/material/Box";
+import MenuItem from "@mui/material/MenuItem";
 
-
+import Button from '@mui/material/Button';
 
 const App = () => {
   return (
@@ -22,7 +25,7 @@ const App = () => {
       <footer className="footer">Simple Expense Managing App</footer>
     </div>
   );
-}
+};
 
 export default App;
 
@@ -58,76 +61,99 @@ const ExpenseTracker = () => {
       </div>
     );
   }
-}
+};
 
 const ExpenseForm = ({ updateList }) => {
-  
-  function handleSubmit(e) {
-    e.preventDefault();
+  function handleSubmit(event) {
+    event.preventDefault();
     updateList(
-      e.target.elements.cost.value,
-      e.target.elements.category.value,
-      e.target.elements.date.value,
-      e.target.elements.note.value
+      event.target.elements.cost.value,
+      event.target.elements.category.value,
+      event.target.elements.date.value,
+      event.target.elements.note.value
     );
   }
 
-  var curr = new Date();
+  let curr = new Date();
   curr.setDate(curr.getDate());
-  var date = curr.toISOString().substring(0, 10);
+  let date = curr.toISOString().substring(0, 10);
 
   return (
-    <div>
-      <form onSubmit={handleSubmit} className="expense-form-container">
-        <label id="costLabel">Cost ($)</label>
-        <input
-          type="number"
-          required
-          step="0.01"
-          placeholder="0.00"
-          name="cost"
-          id="costInput"
-        />
-        <label id="categoryLabel">Category</label>
-        <select name="category" id="categoryInput">
-          <option>Housing</option>
-          <option>Utilities</option>
-          <option>Transporation</option>
-          <option>Grocieries</option>
-          <option>Dining Out</option>
-          <option>Insurance</option>
-          <option>Healthcare</option>
-          <option>Entertainment</option>
-          <option>Education</option>
-          <option>Debts & Loans</option>
-          <option>Clothing</option>
-          <option>Personal Care</option>
-          <option>Charity & Gifts</option>
-          <option>Travel</option>
-          <option>Miscallaneous</option>
-        </select>
-        <label id="dateLabel">Date</label>
-        <input
-          type="date"
-          required
-          name="date"
-          id="dateInput"
-          defaultValue={date}
-        />
-        <label id="noteLabel">Note</label>
-        <textarea
-          name="note"
-          maxLength={100}
+    <Box
+      component="form"
+      sx={{ "& > :not(style)": { m: 1, width: "25ch" } }}
+      autoComplete="off"
+      onSubmit={handleSubmit}
+      className="expense-form-container"
+    >
+      <TextField
+        id="costInput"
+        name="cost"
+        label="Cost"
+        type="number"
+        required
+        placeholder="0.0"
+        slotProps={{
+          inputLabel: {
+            shrink: true
+          },
+          htmlInput: {
+            step: "0.01",
+          }
+        }}
+      />
+      <TextField
+        id="categoryInput"
+        name="category"
+        select
+        label="Category"
+        defaultValue="Housing"
+        required
+      >
+        <MenuItem>Housing</MenuItem>
+        <MenuItem>Utilities</MenuItem>
+        <MenuItem>Transporation</MenuItem>
+        <MenuItem>Grocieries</MenuItem>
+        <MenuItem>Dining Out</MenuItem>
+        <MenuItem>Insurance</MenuItem>
+        <MenuItem>Healthcare</MenuItem>
+        <MenuItem>Entertainment</MenuItem>
+        <MenuItem>Education</MenuItem>
+        <MenuItem>Debts & Loans</MenuItem>
+        <MenuItem>Clothing</MenuItem>
+        <MenuItem>Personal Care</MenuItem>
+        <MenuItem>Charity & Gifts</MenuItem>
+        <MenuItem>Travel</MenuItem>
+        <MenuItem>Miscallaneous</MenuItem>
+      </TextField>
+      <TextField
+        id="dateInput"
+        name="date"
+        label="Date"
+        type="date"
+        required
+        defaultValue={date}
+        slotProps={{
+          shrink: true
+        }}
+      />
+      <TextField
           id="noteInput"
-          placeholder="Optional Note"
+          name="note"
+          label="Note"
+          multiline
+          placeholder="Optional note"
+          maxRows={4}
+          slotProps={{
+            inputLabel: {
+              shrink: true
+            }
+          }}
         />
-        <button type="submit" id="submitButton">
-          Submit{" "}
-        </button>
-      </form>
-    </div>
+        <Button variant="outlined" type="submit" id="submitButton">Submit</Button>
+    </Box>
   );
-}
+};
 
 const ExpenseResult = ({ expenses }) => {
   let totalSum = 0;
@@ -181,28 +207,29 @@ const ExpenseResult = ({ expenses }) => {
       </div>
     </article>
   );
-}
-
+};
 
 const ExpenseList = ({ expenses }) => {
-  
   const columns = [
-    { field: 'id', headerName: 'ID', width: 70 },
-    { field: 'cost', headerName: 'Cost ($)', width: 130 },
-    { field: 'category', headerName: 'Category', width: 130 },
-    { field: 'date', headerName: 'Date', width: 130 },
-    { field: 'note', headerName: 'Note', width: 250 }
+    { field: "id", headerName: "ID", width: 70 },
+    { field: "cost", headerName: "Cost ($)", width: 130 },
+    { field: "category", headerName: "Category", width: 130 },
+    { field: "date", headerName: "Date", width: 130 },
+    { field: "note", headerName: "Note", width: 250 },
   ];
 
   const rows = expenses.map((expense, rowIndex) => ({
-    id: rowIndex, cost: expense.cost, category: expense.category, date: expense.date, note: expense.note == "" ? "No Note" : expense.note
+    id: rowIndex,
+    cost: expense.cost,
+    category: expense.category,
+    date: expense.date,
+    note: expense.note == "" ? "No Note" : expense.note,
   }));
-
 
   const paginationModel = { page: 0, pageSize: 9 };
 
   return (
-    <Paper sx={{ height: 600, width: '100%' }}>
+    <Paper sx={{ height: 600, width: "100%" }}>
       <DataGrid
         rows={rows}
         columns={columns}
@@ -212,9 +239,8 @@ const ExpenseList = ({ expenses }) => {
         sx={{ border: 0 }}
       />
     </Paper>
-    
   );
-}
+};
 
 // const RemoveButton = ({ rowIndex, handleRemove }) => {
 //   function clickHandler() {
@@ -223,4 +249,3 @@ const ExpenseList = ({ expenses }) => {
 
 //   return <button onClick={clickHandler}>X</button>;
 // }
-
