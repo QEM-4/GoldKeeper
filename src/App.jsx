@@ -1,9 +1,15 @@
 /* eslint-disable react/prop-types */
 import "./App.css";
 import { useState } from "react";
+
 import { Chart, ArcElement } from "chart.js/auto";
 import { Doughnut } from "react-chartjs-2";
 Chart.register(ArcElement);
+
+
+import { DataGrid } from '@mui/x-data-grid';
+import Paper from '@mui/material/Paper';
+
 
 
 const App = () => {
@@ -31,11 +37,11 @@ const ExpenseTracker = () => {
     setExpenses(temp);
   }
 
-  function handleRemove(rowIndex) {
-    let temp = [...expenses];
-    temp.splice(rowIndex, 1);
-    setExpenses(temp);
-  }
+  // function handleRemove(rowIndex) {
+  //   let temp = [...expenses];
+  //   temp.splice(rowIndex, 1);
+  //   setExpenses(temp);
+  // }
 
   if (expenses.length == 0) {
     return (
@@ -48,7 +54,7 @@ const ExpenseTracker = () => {
       <div className="expense-tracker-container">
         <ExpenseForm updateList={updateList} />
         <ExpenseResult expenses={expenses} />
-        <ExpenseList expenses={expenses} handleRemove={handleRemove} />
+        <ExpenseList expenses={expenses} />
       </div>
     );
   }
@@ -178,40 +184,70 @@ const ExpenseResult = ({ expenses }) => {
 }
 
 
-const ExpenseList = ({ expenses, handleRemove }) => {
-  const tableRows = expenses.map((expense, rowIndex) => (
-    <tr key={rowIndex}>
-      <td>{expense.cost}</td>
-      <td>{expense.category}</td>
-      <td>{expense.date}</td>
-      <td>{expense.note == "" ? "No Note" : expense.note}</td>
-      <td>
-        <RemoveButton rowIndex={rowIndex} handleRemove={handleRemove} />
-      </td>
-    </tr>
-  ));
+const ExpenseList = ({ expenses }) => {
+  
+  const columns = [
+    { field: 'id', headerName: 'ID', width: 70 },
+    { field: 'cost', headerName: 'Cost ($)', width: 130 },
+    { field: 'category', headerName: 'Category', width: 130 },
+    { field: 'date', headerName: 'Date', width: 130 },
+    { field: 'note', headerName: 'Note', width: 250 }
+  ];
+
+  const rows = expenses.map((expense, rowIndex) => ({
+    id: rowIndex, cost: expense.cost, category: expense.category, date: expense.date, note: expense.note == "" ? "No Note" : expense.note
+  }));
+
+
+
+  // const rows = expenses.map((expense, rowIndex) => (
+  //   <tr key={rowIndex}>
+  //     <td>{expense.cost}</td>
+  //     <td>{expense.category}</td>
+  //     <td>{expense.date}</td>
+  //     <td>{expense.note == "" ? "No Note" : expense.note}</td>
+  //     <td>
+  //       <RemoveButton rowIndex={rowIndex} handleRemove={handleRemove} />
+  //     </td>
+  //   </tr>
+  // ));
+
+  const paginationModel = { page: 0, pageSize: 9 };
 
   return (
-    <table className="expense-table-container">
-      <thead>
-        <tr>
-          <th>Cost ($)</th>
-          <th>Category</th>
-          <th>Date</th>
-          <th>Note</th>
-          <th>Remove</th>
-        </tr>
-      </thead>
-      <tbody>{tableRows}</tbody>
-    </table>
+    <Paper sx={{ height: 600, width: '100%' }}>
+      <DataGrid
+        rows={rows}
+        columns={columns}
+        initialState={{ pagination: { paginationModel } }}
+        pageSizeOptions={[5, 10]}
+        checkboxSelection
+        sx={{ border: 0 }}
+      />
+    </Paper>
+
+
+
+    // <table className="expense-table-container">
+    //   <thead>
+    //     <tr>
+    //       <th>Cost ($)</th>
+    //       <th>Category</th>
+    //       <th>Date</th>
+    //       <th>Note</th>
+    //       <th>Remove</th>
+    //     </tr>
+    //   </thead>
+    //   <tbody>{tableRows}</tbody>
+    // </table>
   );
 }
 
-const RemoveButton = ({ rowIndex, handleRemove }) => {
-  function clickHandler() {
-    handleRemove(rowIndex);
-  }
+// const RemoveButton = ({ rowIndex, handleRemove }) => {
+//   function clickHandler() {
+//     handleRemove(rowIndex);
+//   }
 
-  return <button onClick={clickHandler}>X</button>;
-}
+//   return <button onClick={clickHandler}>X</button>;
+// }
 
