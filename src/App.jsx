@@ -7,7 +7,7 @@ Chart.register(ArcElement);
 
 export default App;
 
-function App() {
+const App = () => {
   return (
     <div className="flex-container">
       <header className="header">Simple Expense Managing App</header>
@@ -20,7 +20,7 @@ function App() {
 }
 
 
-function ExpenseTracker() {
+const ExpenseTracker = () => {
   const [expenses, setExpenses] = useState([]);
 
   function updateList(cost, category, date, note) {
@@ -54,7 +54,8 @@ function ExpenseTracker() {
   }
 }
 
-function ExpenseForm({ updateList }) {
+const ExpenseForm = ({ updateList }) => {
+  
   function handleSubmit(e) {
     e.preventDefault();
     updateList(
@@ -122,7 +123,7 @@ function ExpenseForm({ updateList }) {
   );
 }
 
-function ExpenseResult({ expenses }) {
+const ExpenseResult = ({ expenses }) => {
   let totalSum = 0;
   let categories = [];
   let correspondingSums = [];
@@ -177,7 +178,7 @@ function ExpenseResult({ expenses }) {
 }
 
 
-function ExpenseList({ expenses, removeExpense }) {
+const ExpenseList = ({ expenses, removeExpense }) => {
   const tableRows = expenses.map((expense, rowIndex) => (
     <tr key={rowIndex}>
       <td>{expense.cost}</td>
@@ -206,7 +207,7 @@ function ExpenseList({ expenses, removeExpense }) {
   );
 }
 
-function RemoveButton({ rowIndex, removeExpense }) {
+const RemoveButton = ({ rowIndex, removeExpense }) => {
   function clickHandler() {
     removeExpense(rowIndex);
   }
