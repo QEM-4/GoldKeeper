@@ -199,19 +199,6 @@ const ExpenseList = ({ expenses }) => {
   }));
 
 
-
-  // const rows = expenses.map((expense, rowIndex) => (
-  //   <tr key={rowIndex}>
-  //     <td>{expense.cost}</td>
-  //     <td>{expense.category}</td>
-  //     <td>{expense.date}</td>
-  //     <td>{expense.note == "" ? "No Note" : expense.note}</td>
-  //     <td>
-  //       <RemoveButton rowIndex={rowIndex} handleRemove={handleRemove} />
-  //     </td>
-  //   </tr>
-  // ));
-
   const paginationModel = { page: 0, pageSize: 9 };
 
   return (
@@ -225,21 +212,7 @@ const ExpenseList = ({ expenses }) => {
         sx={{ border: 0 }}
       />
     </Paper>
-
-
-
-    // <table className="expense-table-container">
-    //   <thead>
-    //     <tr>
-    //       <th>Cost ($)</th>
-    //       <th>Category</th>
-    //       <th>Date</th>
-    //       <th>Note</th>
-    //       <th>Remove</th>
-    //     </tr>
-    //   </thead>
-    //   <tbody>{tableRows}</tbody>
-    // </table>
+    
   );
 }
 
