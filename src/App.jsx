@@ -5,7 +5,6 @@ import { Chart, ArcElement } from "chart.js/auto";
 import { Doughnut } from "react-chartjs-2";
 Chart.register(ArcElement);
 
-export default App;
 
 const App = () => {
   return (
@@ -19,6 +18,7 @@ const App = () => {
   );
 }
 
+export default App;
 
 const ExpenseTracker = () => {
   const [expenses, setExpenses] = useState([]);
@@ -31,7 +31,7 @@ const ExpenseTracker = () => {
     setExpenses(temp);
   }
 
-  function removeExpense(rowIndex) {
+  function handleRemove(rowIndex) {
     let temp = [...expenses];
     temp.splice(rowIndex, 1);
     setExpenses(temp);
@@ -48,7 +48,7 @@ const ExpenseTracker = () => {
       <div className="expense-tracker-container">
         <ExpenseForm updateList={updateList} />
         <ExpenseResult expenses={expenses} />
-        <ExpenseList expenses={expenses} removeExpense={removeExpense} />
+        <ExpenseList expenses={expenses} handleRemove={handleRemove} />
       </div>
     );
   }
@@ -178,7 +178,7 @@ const ExpenseResult = ({ expenses }) => {
 }
 
 
-const ExpenseList = ({ expenses, removeExpense }) => {
+const ExpenseList = ({ expenses, handleRemove }) => {
   const tableRows = expenses.map((expense, rowIndex) => (
     <tr key={rowIndex}>
       <td>{expense.cost}</td>
@@ -186,7 +186,7 @@ const ExpenseList = ({ expenses, removeExpense }) => {
       <td>{expense.date}</td>
       <td>{expense.note == "" ? "No Note" : expense.note}</td>
       <td>
-        <RemoveButton rowIndex={rowIndex} removeExpense={removeExpense} />
+        <RemoveButton rowIndex={rowIndex} handleRemove={handleRemove} />
       </td>
     </tr>
   ));
@@ -207,9 +207,9 @@ const ExpenseList = ({ expenses, removeExpense }) => {
   );
 }
 
-const RemoveButton = ({ rowIndex, removeExpense }) => {
+const RemoveButton = ({ rowIndex, handleRemove }) => {
   function clickHandler() {
-    removeExpense(rowIndex);
+    handleRemove(rowIndex);
   }
 
   return <button onClick={clickHandler}>X</button>;
