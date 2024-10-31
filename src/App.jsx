@@ -15,14 +15,26 @@ import MenuItem from "@mui/material/MenuItem";
 
 import Button from '@mui/material/Button';
 
+import Typography from '@mui/material/Typography';
+
+
+
 const App = () => {
   return (
     <div className="flex-container">
-      <header className="header">Simple Expense Managing App</header>
+      <header className="header">
+        <Typography variant="h6">
+          Simple Expense Managing App
+        </Typography>
+      </header>
       <main className="main-content">
         <ExpenseTracker />
       </main>
-      <footer className="footer">Simple Expense Managing App</footer>
+      <footer className="footer">
+        <Typography variant="h6">
+          Simple Expense Managing App
+        </Typography>
+      </footer>
     </div>
   );
 };
@@ -201,7 +213,7 @@ const ExpenseResult = ({ expenses }) => {
 
   return (
     <article className="expense-result-container">
-      <div>Total Amount Spent ($): {totalSum}</div>
+      <Typography variant="h6">Total Amount Spent ($): {totalSum}</Typography>
       <div className="chart-container">
         <Doughnut data={data} width={300} height={300} />
       </div>
