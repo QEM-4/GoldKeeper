@@ -107,17 +107,3 @@
   gap: 30px;
   padding-bottom: 50px;
 }
-
-table, th, td {
-  border: 1px solid black;
-  border-collapse: collapse;
-}
-
-thead {
-  background-color: #787c82;
-}
-
-td {
-  vertical-align: middle;
-  text-align: center;
-}
