@@ -62,7 +62,7 @@ const ExpenseTracker = () => {
     return (
       <div className="expense-tracker-container">
         <ExpenseForm updateList={updateList} />
-        <ExpenseResult expenses={expenses} />
+        <ExpenseGraph expenses={expenses} />
         <ExpenseTable expenses={expenses} />
       </div>
     );
@@ -159,7 +159,7 @@ const ExpenseForm = ({ updateList }) => {
   );
 };
 
-const ExpenseResult = ({ expenses }) => {
+const ExpenseGraph = ({ expenses }) => {
   let totalSum = 0;
   let categories = [];
   let correspondingSums = [];
