@@ -46,12 +46,6 @@ const ExpenseTracker = () => {
     setExpenses(temp);
   }
 
-  // function handleRemove(rowIndex) {
-  //   let temp = [...expenses];
-  //   temp.splice(rowIndex, 1);
-  //   setExpenses(temp);
-  // }
-
   if (expenses.length == 0) {
     return (
       <div className="expense-tracker-container">
@@ -245,11 +239,3 @@ const ExpenseTable = ({ expenses }) => {
     </Paper>
   );
 };
-
-// const RemoveButton = ({ rowIndex, handleRemove }) => {
-//   function clickHandler() {
-//     handleRemove(rowIndex);
-//   }
-
-//   return <button onClick={clickHandler}>X</button>;
-// }
