@@ -63,7 +63,7 @@ const ExpenseTracker = () => {
       <div className="expense-tracker-container">
         <ExpenseForm updateList={updateList} />
         <ExpenseResult expenses={expenses} />
-        <ExpenseList expenses={expenses} />
+        <ExpenseTable expenses={expenses} />
       </div>
     );
   }
@@ -213,7 +213,7 @@ const ExpenseResult = ({ expenses }) => {
   );
 };
 
-const ExpenseList = ({ expenses }) => {
+const ExpenseTable = ({ expenses }) => {
   const columns = [
     { field: "id", headerName: "ID", width: 70 },
     { field: "cost", headerName: "Cost ($)", width: 130 },
