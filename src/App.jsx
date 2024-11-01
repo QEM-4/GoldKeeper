@@ -233,7 +233,7 @@ const ExpenseList = ({ expenses }) => {
   const paginationModel = { page: 0, pageSize: 9 };
 
   return (
-    <Paper sx={{ height: 600, width: "100%" }}>
+    <Paper sx={{ height: 600, width: "70%", display: 'flex', justifyContent: 'center', margin: 'auto' }}>
       <DataGrid
         rows={rows}
         columns={columns}
