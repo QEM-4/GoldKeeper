@@ -13,27 +13,21 @@ import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import MenuItem from "@mui/material/MenuItem";
 
-import Button from '@mui/material/Button';
+import Button from "@mui/material/Button";
 
-import Typography from '@mui/material/Typography';
-
-
+import Typography from "@mui/material/Typography";
 
 const App = () => {
   return (
     <div className="flex-container">
       <header className="header">
-        <Typography variant="h6">
-          Simple Expense Managing App
-        </Typography>
+        <Typography variant="h6">Simple Expense Managing App</Typography>
       </header>
       <main className="main-content">
         <ExpenseTracker />
       </main>
       <footer className="footer">
-        <Typography variant="h6">
-          Simple Expense Managing App
-        </Typography>
+        <Typography variant="h6">Simple Expense Managing App</Typography>
       </footer>
     </div>
   );
@@ -105,13 +99,11 @@ const ExpenseForm = ({ updateList }) => {
         type="number"
         required
         placeholder="0.0"
-        slotProps={{
-          inputLabel: {
-            shrink: true
-          },
-          htmlInput: {
-            step: "0.01",
-          }
+        InputLabelProps={{
+          shrink: true,
+        }}
+        inputProps={{
+          step: "0.01"
         }}
       />
       <TextField
@@ -122,21 +114,21 @@ const ExpenseForm = ({ updateList }) => {
         defaultValue="Housing"
         required
       >
-        <MenuItem>Housing</MenuItem>
-        <MenuItem>Utilities</MenuItem>
-        <MenuItem>Transporation</MenuItem>
-        <MenuItem>Grocieries</MenuItem>
-        <MenuItem>Dining Out</MenuItem>
-        <MenuItem>Insurance</MenuItem>
-        <MenuItem>Healthcare</MenuItem>
-        <MenuItem>Entertainment</MenuItem>
-        <MenuItem>Education</MenuItem>
-        <MenuItem>Debts & Loans</MenuItem>
-        <MenuItem>Clothing</MenuItem>
-        <MenuItem>Personal Care</MenuItem>
-        <MenuItem>Charity & Gifts</MenuItem>
-        <MenuItem>Travel</MenuItem>
-        <MenuItem>Miscallaneous</MenuItem>
+        <MenuItem value="Housing">Housing</MenuItem>
+        <MenuItem value="Utilities">Utilities</MenuItem>
+        <MenuItem value="Transportation">Transportation</MenuItem>
+        <MenuItem value="Groceries">Groceries</MenuItem>
+        <MenuItem value="Dining Out">Dining Out</MenuItem>
+        <MenuItem value="Insurance">Insurance</MenuItem>
+        <MenuItem value="Healthcare">Healthcare</MenuItem>
+        <MenuItem value="Entertainment">Entertainment</MenuItem>
+        <MenuItem value="Education">Education</MenuItem>
+        <MenuItem value="Debts & Loans">Debts & Loans</MenuItem>
+        <MenuItem value="Clothing">Clothing</MenuItem>
+        <MenuItem value="Personal Care">Personal Care</MenuItem>
+        <MenuItem value="Charity & Gifts">Charity & Gifts</MenuItem>
+        <MenuItem value="Travel">Travel</MenuItem>
+        <MenuItem value="Miscellaneous">Miscellaneous</MenuItem>
       </TextField>
       <TextField
         id="dateInput"
@@ -146,23 +138,23 @@ const ExpenseForm = ({ updateList }) => {
         required
         defaultValue={date}
         slotProps={{
-          shrink: true
+          shrink: true,
         }}
       />
       <TextField
-          id="noteInput"
-          name="note"
-          label="Note"
-          multiline
-          placeholder="Optional note"
-          maxRows={4}
-          slotProps={{
-            inputLabel: {
-              shrink: true
-            }
-          }}
-        />
-        <Button variant="outlined" type="submit" id="submitButton">Submit</Button>
+        id="noteInput"
+        name="note"
+        label="Note"
+        multiline
+        placeholder="Optional note"
+        maxRows={4}
+        InputLabelProps={{
+          shrink: true,
+        }}
+      />
+      <Button variant="outlined" type="submit" id="submitButton">
+        Submit
+      </Button>
     </Box>
   );
 };
