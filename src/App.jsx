@@ -38,9 +38,9 @@ export default App;
 const ExpenseTracker = () => {
   const [expenses, setExpenses] = useState([]);
 
-  function updateList(cost, category, date, note) {
+  function updateList(id, cost, category, date, note) {
     let temp = [...expenses];
-    let newExpense = { cost, category, date, note };
+    let newExpense = { id, cost, category, date, note };
     temp.push(newExpense);
 
     setExpenses(temp);
@@ -64,9 +64,13 @@ const ExpenseTracker = () => {
 };
 
 const ExpenseForm = ({ updateList }) => {
+  
+  
   function handleSubmit(event) {
     event.preventDefault();
+    let timestamp = new Date().toISOString();
     updateList(
+      timestamp,
       event.target.elements.cost.value,
       event.target.elements.category.value,
       event.target.elements.date.value,
@@ -209,15 +213,14 @@ const ExpenseGraph = ({ expenses }) => {
 
 const ExpenseTable = ({ expenses }) => {
   const columns = [
-    { field: "id", headerName: "ID", width: 70 },
     { field: "cost", headerName: "Cost ($)", width: 130 },
     { field: "category", headerName: "Category", width: 130 },
     { field: "date", headerName: "Date", width: 130 },
     { field: "note", headerName: "Note", width: 250 },
   ];
 
-  const rows = expenses.map((expense, rowIndex) => ({
-    id: rowIndex,
+  const rows = expenses.map((expense) => ({
+    id: expense.id,
     cost: expense.cost,
     category: expense.category,
     date: expense.date,
@@ -227,7 +230,7 @@ const ExpenseTable = ({ expenses }) => {
   const paginationModel = { page: 0, pageSize: 9 };
 
   return (
-    <Paper sx={{ height: 600, width: "70%", display: 'flex', justifyContent: 'center', margin: 'auto' }}>
+    <Paper sx={{ height: 600, width: "55%", display: 'flex', justifyContent: 'center', margin: 'auto' }}>
       <DataGrid
         rows={rows}
         columns={columns}
